@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-800;
+  }
+}
