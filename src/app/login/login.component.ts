@@ -3,16 +3,25 @@ declare const google: any;
 import { Component, OnInit } from '@angular/core';
 import {
   handleCredentialResponse,
+  signinWithEmail,
 } from '../../utils/firebase.utils';
 import { validateUser } from '../../utils/validateUser';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
+  email = '';
+  password = '';
+
+  handleSubmit() {
+    signinWithEmail(this.email, this.password);
+  }
+
   ngOnInit() {
     google.accounts.id.initialize({
       client_id:
