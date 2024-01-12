@@ -33,9 +33,8 @@ export const signinWithEmail = async (email: string, password: string) => {
     );
     const user = await userCredential.user;
     await localStorage.setItem('token', user.uid);
-    console.log(user);
   } catch (error) {
-    console.log(error);
+    alert('Usuario o contraseña incorrectos');
   }
 };
 

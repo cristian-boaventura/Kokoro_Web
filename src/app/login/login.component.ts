@@ -8,11 +8,12 @@ import {
 import { validateUser } from '../../utils/validateUser';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, SpinnerComponent],
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
@@ -26,10 +27,18 @@ export class LoginComponent implements OnInit {
 
   email = '';
   password = '';
+  isLoading = false;
 
-  async handleSubmit() {
-    await signinWithEmail(this.email, this.password);
-    this.goToHome();
+  async handleSubmit(e: any) {
+    const form = e.target;
+    form.reportValidity();
+
+    if (form.checkValidity()) {
+      this.isLoading = true;
+      await signinWithEmail(this.email, this.password);
+      this.goToHome();
+      this.isLoading = false;
+    }
   }
 
   ngOnInit() {
@@ -65,7 +74,7 @@ export class LoginComponent implements OnInit {
         this.goToHome();
       } else {
         // handle invalid user
-        console.log('User is not registered');
+        alert('Error: Usuario no registrado');
       }
     } catch (error: any) {
       console.error(error);
