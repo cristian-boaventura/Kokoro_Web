@@ -7,6 +7,7 @@ import {
 } from '../../utils/firebase.utils';
 import { validateUser } from '../../utils/validateUser';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +16,20 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
+  constructor(private router: Router) {
+    this.router = router;
+  }
+
+  goToHome() {
+    this.router.navigate(['delete-account']);
+  }
+
   email = '';
   password = '';
 
-  handleSubmit() {
-    signinWithEmail(this.email, this.password);
+  async handleSubmit() {
+    await signinWithEmail(this.email, this.password);
+    this.goToHome();
   }
 
   ngOnInit() {
@@ -51,7 +61,8 @@ export class LoginComponent implements OnInit {
       const userExists = await validateUser(google_uid);
       // handle valid user
       if (userExists) {
-        handleCredentialResponse(response);
+        await handleCredentialResponse(response);
+        this.goToHome();
       } else {
         // handle invalid user
         console.log('User is not registered');
