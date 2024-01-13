@@ -32,9 +32,10 @@ export const signinWithEmail = async (email: string, password: string) => {
       password
     );
     const user = await userCredential.user;
+    console.log(user);
     await localStorage.setItem('token', user.uid);
   } catch (error) {
-    alert('Usuario o contraseña incorrectos');
+    throw error;
   }
 };
 
@@ -46,8 +47,8 @@ export const handleCredentialResponse = async (response: any) => {
 
     await signInWithCredential(auth, credential);
     await localStorage.setItem('token', response.credential);
-  } catch (error: any) {
-    console.error(error);
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -59,6 +60,6 @@ export const signout = async () => {
       await localStorage.removeItem('token');
     }
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };

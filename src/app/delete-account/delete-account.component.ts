@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { signout } from '../../utils/firebase.utils';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { setStore } from '../../utils/firebase.utils';
 
 @Component({
   selector: 'app-delete-account',
@@ -32,7 +33,12 @@ export class DeleteAccountComponent {
   }
 
   async signout() {
-    await signout();
-    this.goToHome();
+    try {
+      await signout();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.goToHome();
+    }
   }
 }

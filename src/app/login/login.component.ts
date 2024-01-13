@@ -35,9 +35,14 @@ export class LoginComponent implements OnInit {
 
     if (form.checkValidity()) {
       this.isLoading = true;
-      await signinWithEmail(this.email, this.password);
-      this.goToHome();
-      this.isLoading = false;
+      try {
+        await signinWithEmail(this.email, this.password);
+        this.goToHome();
+      } catch (error) {
+        alert('Usuario o contraseña incorrectos');
+      } finally {
+        this.isLoading = false;
+      }
     }
   }
 
