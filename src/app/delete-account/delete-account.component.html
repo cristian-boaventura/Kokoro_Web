@@ -3,14 +3,27 @@
     <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
       Contanos por qué deseas eliminar tu cuenta
     </h2>
-    <form>
-      <div class="mb-4 sm:mb-5">
+    <form (ngSubmit)="handleSubmit($event)">
+      <div class="mb-4 flex flex-col">
+        <label
+          for="reason"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Motivos</label
+        >
         <textarea
-          id="description"
+          id="reason"
           rows="8"
-          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+          name="reason"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white mb-2"
           placeholder="Escribe tus motivos acá..."
+          required
+          minlength="10"
+          maxlength="256"
+          [(ngModel)]="reason"
         ></textarea>
+        <span class="text-sm text-gray-900 dark:text-white self-end"
+          >{{ 256 - reason.length }} / 256</span
+        >
       </div>
       <div class="flex items-center space-x-4">
         <button
