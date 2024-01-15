@@ -35,11 +35,7 @@ export class DeleteAccountComponent {
       this.isLoading = true;
       this.showModal = true;
       try {
-        // throw new Error('Error de prueba');
         await setStore(this.reason);
-        setTimeout(async () => {
-          // await signout();
-        }, 5000);
       } catch (error: any) {
         console.error(error);
         this.errorMessage = error.message;
