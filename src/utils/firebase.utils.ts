@@ -32,22 +32,21 @@ export const signinWithEmail = async (email: string, password: string) => {
       email,
       password
     );
-    const user = await userCredential.user;
-    console.log(user);
-    await localStorage.setItem('token', user.uid);
+    const user = userCredential.user;
+    localStorage.setItem('token', user.uid);
   } catch (error) {
     throw error;
   }
 };
 
-export const handleCredentialResponse = async (response: any) => {
+export const handleGoogleCredential = async (response: any) => {
   try {
     // Build Firebase credential with the Google ID token.
     const idToken = await response.credential;
-    const credential = await GoogleAuthProvider.credential(idToken);
+    const credential = GoogleAuthProvider.credential(idToken);
 
     await signInWithCredential(auth, credential);
-    await localStorage.setItem('token', response.credential);
+    localStorage.setItem('token', response.credential);
   } catch (error) {
     throw error;
   }
@@ -56,9 +55,9 @@ export const handleCredentialResponse = async (response: any) => {
 export const signout = async () => {
   try {
     await signOut(auth);
-    const token = await localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token) {
-      await localStorage.removeItem('token');
+      localStorage.removeItem('token');
     }
   } catch (error) {
     throw error;
@@ -69,7 +68,7 @@ const db = getFirestore(app);
 
 export const setStore = async (reason: string) => {
   try {
-    const user = await auth.currentUser;
+    const user = auth.currentUser;
     if (!user) {
       throw new Error('User not found');
     }

@@ -9,13 +9,17 @@ export class AuthService {
   isLoggedIn: boolean = false;
 
   constructor(private router: Router) {
-    this.isLoggedIn = localStorage.getItem('token') ? true : false;
+    this.updateLoginStatus();
 
     window.addEventListener('storage', (event) => {
       if (event.key === 'token') {
-        this.isLoggedIn = event.newValue ? true : false;
+        this.updateLoginStatus();
       }
     });
+  }
+
+  updateLoginStatus() {
+    this.isLoggedIn = localStorage.getItem('token') ? true : false;
   }
 
   goToHome() {

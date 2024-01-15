@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ApplicationRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
@@ -74,9 +80,13 @@ export class ModalComponent {
   closeModal() {
     this.showModal = false;
     this.showModalChange.emit(this.showModal);
+    this.appRef.tick();
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private appRef: ApplicationRef
+  ) {}
 
   goToHome() {
     this.authService.goToHome();

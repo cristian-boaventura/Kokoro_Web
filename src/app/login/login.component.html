@@ -8,7 +8,7 @@
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <img
           class="w-3/4 mx-auto mb-6 max-w-[250px]"
-          src="../../assets/Logo_Kokoro.png"
+          src="../../assets/Logo_Kokoro.svg"
           alt="logo"
         />
         <h1
@@ -70,10 +70,18 @@
             class="w-full text-white bg-primary-600 hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700"
             [disabled]="isLoading"
           >
-            @if(isLoading) {<app-spinner />} @else {Iniciar Sesión}
+            Iniciar Sesión
           </button>
         </form>
       </div>
     </div>
   </div>
+  @if (showModal) {
+  <app-modal
+    [(isLoading)]="isLoading"
+    [(showModal)]="showModal"
+    [(isError)]="isError"
+    [(errorMessage)]="errorMessage"
+  />
+  }
 </section>
