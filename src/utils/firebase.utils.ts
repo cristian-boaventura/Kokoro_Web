@@ -79,7 +79,7 @@ export const setStore = async (reason: string) => {
       phoneNumber: user.phoneNumber,
       reason,
     };
-    await addDoc(collection(db, 'users'), store);
+    await addDoc(collection(db, 'deleted_user_web'), store);
   } catch (error) {
     throw error;
   }
