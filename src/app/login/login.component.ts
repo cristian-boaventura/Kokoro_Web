@@ -49,7 +49,11 @@ export class LoginComponent implements OnInit {
         this.goToHome();
       } catch (error: any) {
         this.isError = true;
-        this.errorMessage = error.message;
+        if (error.code === 'auth/invalid-credential') {
+          this.errorMessage = 'Usuario o contraseña incorrectos';
+        } else {
+          this.errorMessage = error.message;
+        }
         this.isLoading = false;
       } finally {
         this.cdr.detectChanges();
