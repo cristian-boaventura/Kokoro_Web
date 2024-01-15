@@ -20,6 +20,7 @@
           minlength="10"
           maxlength="256"
           [(ngModel)]="reason"
+          [disabled]="isLoading"
         ></textarea>
         <span class="text-sm text-gray-900 dark:text-white self-end"
           >{{ 256 - reason.length }} / 256</span
@@ -30,12 +31,14 @@
           type="button"
           class="text-white bg-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700"
           (click)="signout()"
+          [disabled]="isLoading"
         >
           Cancelar
         </button>
         <button
           type="submit"
           class="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600"
+          [disabled]="isLoading"
         >
           <svg
             class="w-5 h-5 mr-1 -ml-1"
@@ -54,4 +57,13 @@
       </div>
     </form>
   </div>
+  @if (showModal) {
+  <app-modal
+    [(isLoading)]="isLoading"
+    [(showModal)]="showModal"
+    [(isError)]="isError"
+    [(errorMessage)]="errorMessage"
+    [successMessage]="successMessage"
+  />
+  }
 </section>

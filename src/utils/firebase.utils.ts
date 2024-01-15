@@ -7,6 +7,7 @@ import {
   signInWithCredential,
   signOut,
 } from 'firebase/auth';
+import { getFirestore, addDoc, collection } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 export const firebaseConfig = {
@@ -59,6 +60,27 @@ export const signout = async () => {
     if (token) {
       await localStorage.removeItem('token');
     }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const db = getFirestore(app);
+
+export const setStore = async (reason: string) => {
+  try {
+    const user = await auth.currentUser;
+    if (!user) {
+      throw new Error('User not found');
+    }
+    const store = {
+      id: user.uid,
+      name: user.displayName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      reason,
+    };
+    await addDoc(collection(db, 'users'), store);
   } catch (error) {
     throw error;
   }
