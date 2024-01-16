@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
       client_id:
         '138954647249-vhta7kr648j3888rckn4ngak1apu4l0d.apps.googleusercontent.com',
       callback: (resp: any) => this.handleGoogleLogin(resp),
+      use_fedcm_for_prompt: true,
     });
 
     google.accounts.id.renderButton(
