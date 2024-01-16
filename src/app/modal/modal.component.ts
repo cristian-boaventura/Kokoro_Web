@@ -27,10 +27,13 @@ import { AuthService } from '../auth.service';
               class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
             >
               Ha ocurrido el siguiente error:
+              <br />
               <span class="text-red-600 dark:text-red-400">
-                "{{ errorMessage }}" </span
-              >. Por favor, inténtalo de nuevo. Si el error persiste, contacta
-              con nosotros en:
+                "{{ errorMessage }}"
+              </span>
+              <br />
+              Por favor, inténtalo de nuevo. Si el error persiste, contacta con
+              nosotros en:
               <a
                 href="mailto:consultas@appkokoro.com"
                 class="dark:text-primary-600 text-primary-700 underline hover:text-primary-800 dark:hover:text-primary-700"
